@@ -1,0 +1,15 @@
+{
+  "name": "bucket-list",
+  "version": "1.0.0",
+  "description": "This is a bucket list project that will help the users to pick randomly there next challenging adventure",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Zakariae El Mejdki",
+  "license": "ISC",
+  "dependencies": {
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-react": "^6.24.1"
+  }
+}

@@ -1,47 +1,85 @@
-const app = {
-  title: 'Bucket List',
-  subtitle: 'Put your life in the hands of a computer.',
-  options: []
-};
+class App extends React.Component {
+  render() {
+    const title = 'Bucket List';
+    const subtitle = 'Put your life on the hands of a computer.';
+    const options = ['Thing one', 'Thing Two'];
 
-const onFormSubmit = (e) => {
-  e.preventDefault();
-
-  const option = e.target.elements.option;
-
-  if(option.value) {
-    app.options.push(option.value);
-
-    option.value = '';
-
-    renderApp();
+    return (
+      <div>
+        <Header title={title} subtitle={subtitle} />
+        <Action />
+        <Options list={options} />
+        <AddOption />
+      </div>
+    );
   }
 }
 
-const handleRemoveAll = () => {
-  app.options = [];
-  renderApp();
+class Header extends React.Component {
+  render() {
+    return (
+      <div>
+        <h1>{this.props.title}</h1>
+        <p>{this.props.subtitle}</p>
+      </div>
+    );
+  }
 }
 
-const renderApp = () => {
-  const template = (
-    <div>
-      <h1>{app.title}</h1>
-      { app.subtitle && <p>{app.subtitle}</p>}
-      <p>{(app.options && app.options.length > 0) ? 'Here are your options' : 'No Options'}</p>
-      <button onClick={handleRemoveAll}>Remove All</button>
-      <ol>
-        { app.options.map((option, index) => <li key={index}>{option}</li>) }
-      </ol>
-      <form onSubmit={onFormSubmit}>
-        <input type="text" name="option" />
+class Action extends React.Component {
+  render() {
+    return (
+      <div>
+        <button>What should I do?</button>
+      </div>
+    );
+  }
+}
+
+class Options extends React.Component {
+  render() {
+    return (
+      <div>
+        <p>
+          {
+            this.props.list.length > 0 ?
+            'Here are your options' :
+            'No Options'
+          }
+        </p>
+        <ol>
+          {this.props.list.map(
+            (item, index) => <Option key={index} option={item} />
+          )}
+        </ol>
+      </div>
+    );
+  }
+}
+
+class AddOption extends React.Component {
+  handleAddOption(e) {
+    e.preventDefault();
+
+    if(e.target.elements.option.value) {
+      alert('hi');
+    }
+  }
+
+  render() {
+    return (
+      <form onSubmit={this.handleAddOption}>
+        <input type='text' name='option' />
         <button>Add Option</button>
       </form>
-    </div>
-  );
-  
-    
-  ReactDOM.render(template, document.getElementById('app'));
+    );
+  }
 }
 
-renderApp();
+class Option extends React.Component {
+  render() {
+    return <li>{this.props.option}</li>
+  }
+}
+
+ReactDOM.render(<App />, document.getElementById('app'));

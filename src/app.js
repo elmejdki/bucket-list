@@ -9,6 +9,26 @@ class App extends React.Component {
     this.handlePick = this.handlePick.bind(this);
     this.handleDeleteOptions = this.handleDeleteOptions.bind(this);
     this.handleAddOption = this.handleAddOption.bind(this);
+    this.handleDeleteOption = this.handleDeleteOption.bind(this);
+  }
+
+  componentDidMount() {
+    try {
+      const options = JSON.parse(localStorage.getItem('options'));
+      
+      if (options) {
+        this.setState(() => ({ options }))
+      }
+    } catch (e) {
+      console.log('localStorage is not clean, error: ' + e.message)
+    }
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.options.length !== this.state.options.length) {
+      const json = JSON.stringify(this.state.options);
+      localStorage.setItem('options', json);
+    }
   }
 
   handlePick() {
@@ -33,6 +53,14 @@ class App extends React.Component {
     }));
   }
 
+  handleDeleteOption(optionToRemove) {
+    this.setState((prevState) => ({
+      options: prevState.options.filter(
+        option => optionToRemove !== option
+      )
+    }))
+  }
+
   handleDeleteOptions() {
     this.setState(() => ({ options: [] }));
   }
@@ -52,6 +80,7 @@ class App extends React.Component {
         <Options
           list={options}
           handleDeleteOptions={this.handleDeleteOptions}
+          handleDeleteOption={this.handleDeleteOption}
         />
         <AddOption
           handleAddOption={this.handleAddOption}
@@ -93,14 +122,19 @@ const Options = (props) => {
       </button>
       <p>
         {
-          props.list.length > 0 ?
-          'Here are your options' :
-          'No Options'
+          props.list.length > 0 &&
+          'Please add some data to get started!.'
         }
       </p>
       <ol>
         {props.list.map(
-          (item, index) => <Option key={index} option={item} />
+          (item, index) => {
+            return <Option 
+                    key={index}
+                    option={item}
+                    handleDeleteOption={props.handleDeleteOption}
+                  />
+          }
         )}
       </ol>
     </div>
@@ -108,7 +142,18 @@ const Options = (props) => {
 }
 
 const Option = (props) => {
-  return <li>{props.option}</li>
+  return (
+    <li>
+      {props.option}
+      <button
+        onClick={() => {
+          props.handleDeleteOption(props.option);
+        }}
+      >
+        Remove
+      </button>
+    </li>
+  );
 }
 
 class AddOption extends React.Component {

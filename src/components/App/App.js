@@ -3,10 +3,12 @@ import AddOption from '../AddOption/AddOption';
 import Header from '../Header/Header';
 import Action from '../Action/Action';
 import Options from '../Options/Options';
+import OptionModal from '../OptionModal/OptionModal';
 
 export default class App extends Component {
   state = {
-    options: []
+    options: [],
+    option: null
   }
 
   handlePick = () => {
@@ -16,7 +18,7 @@ export default class App extends Component {
     );
 
     const option = options[optionIndex];
-    alert(option);
+    this.setState(() => ({ option }));
   }
 
   handleAddOption = (option) => {
@@ -41,6 +43,10 @@ export default class App extends Component {
 
   handleDeleteOptions = () => {
     this.setState(() => ({ options: [] }));
+  }
+
+  handleEmptyOption = () => {
+    this.setState(() => ({ option: null }));
   }
 
   componentDidMount() {
@@ -78,6 +84,10 @@ export default class App extends Component {
           list={options}
           handleDeleteOptions={this.handleDeleteOptions}
           handleDeleteOption={this.handleDeleteOption}
+        />
+        <OptionModal
+          selectedOption={this.state.option}
+          handleCloseModal={this.handleEmptyOption}
         />
         <AddOption
           handleAddOption={this.handleAddOption}

@@ -4,15 +4,15 @@
   "description": "This is a bucket list project that will help the users to pick randomly there next challenging adventure",
   "main": "index.js",
   "scripts": {
-    "serve": "live-server public/",
     "build": "webpack --mode production",
-    "dev-server": "webpack serve"
+    "serve": "webpack serve"
   },
   "author": "Zakariae El Mejdki",
   "license": "ISC",
   "dependencies": {
     "react": "^17.0.1",
-    "react-dom": "^17.0.1"
+    "react-dom": "^17.0.1",
+    "react-modal": "^3.12.1"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",

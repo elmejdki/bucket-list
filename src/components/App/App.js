@@ -76,23 +76,29 @@ export default class App extends Component {
     return (
       <div>
         <Header title={title} subtitle={subtitle} />
-        <Action
-          hasOption={!!options.length}
-          handlePick={this.handlePick}
-        />
-        <Options
-          list={options}
-          handleDeleteOptions={this.handleDeleteOptions}
-          handleDeleteOption={this.handleDeleteOption}
-        />
+        <div className='container'>
+          <Action
+            hasOption={!!options.length}
+            handlePick={this.handlePick}
+          />
+          <div className='widget'>
+            <Options
+              list={options}
+              handleDeleteOptions={this.handleDeleteOptions}
+              handleDeleteOption={this.handleDeleteOption}
+            />
+            <AddOption
+              handleAddOption={this.handleAddOption}
+            />
+          </div>
+        </div>
         <OptionModal
           selectedOption={this.state.option}
           handleCloseModal={this.handleEmptyOption}
-        />
-        <AddOption
-          handleAddOption={this.handleAddOption}
         />
       </div>
     );
   }
 }
+
+App.displayName = 'BucketListApp';

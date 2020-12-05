@@ -1,6 +1,6 @@
-# Project Name
+# Bucket List
 
-> One paragraph statement about the project.
+> This project is kind of like a todo list but it's a little bit different cause this is a bucket list a list that people put in what they wish to do and from now and then they pick one wish to work on or achieve it, this project help users do the same thing by saving there wishes and help them there next adventure or wish to work on or achieve. for now it's a small application but I'm sure to make it bigger on the future.
 
 ![screenshot](./app_screenshot.png)
 

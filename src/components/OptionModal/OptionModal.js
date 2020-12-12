@@ -6,11 +6,17 @@ const OptionModal = (props) => (
     isOpen={props.selectedOption}
     onRequestClose={props.handleCloseModal}
     closeTimeoutMS={200}
+    className='modal'
     contentLabel='display a random bucket from the list'
   >
-    <h3>Selected Option</h3>
-    <p>{props.selectedOption}</p>
-    <button onClick={props.handleCloseModal}>close</button>
+    <h3 className="modal__title">Selected Option</h3>
+    <p className="modal__body">{props.selectedOption}</p>
+    <button
+      className="button"
+      onClick={props.handleCloseModal}
+    >
+      close
+    </button>
   </Modal>
 );
 

@@ -6,12 +6,10 @@
 
 ## Built With
 
-- Vanilla JavaScript,
-- the CSS preprocessor SCSS,
+- ReactJS,
+- SCSS,
 - webpack,
-- babel,
-- stylelint,
-- ESlint
+- babel
 
 ## Live Demo
 
